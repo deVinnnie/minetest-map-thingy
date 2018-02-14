@@ -1,0 +1,17 @@
+version: "2"
+services:
+  app:
+    image: minetest-map
+    build:
+      context: .
+    volumes:
+      - /world:opt/world
+      - /resources/tiles:/opt/tiles
+    ports:
+     - 8080:8080
+    networks:
+    - bridge
+
+networks:
+  bridge:
+    driver: bridge

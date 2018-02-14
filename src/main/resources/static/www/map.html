@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<title>Minetest Map</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" href="/webjars/leaflet/leaflet.css" />
+		<link rel="stylesheet" href="leaflet-custom.css" />
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<div id="mapcontainer">
+			<div id="info">
+				Position: <code id='mousemove'></code>
+			</div>
+			<div id="map">
+			</div>
+		</div>
+
+		<div id="poi">
+			<h3>POI</h3>
+			<ul id="map-navigation">
+			</ul>
+		</div>
+
+		<script src="/webjars/jquery/jquery.min.js"></script>
+		<script src="/webjars/leaflet/leaflet-src.js"></script>
+		<script src="poi.js"></script>
+		<script src="map.js"></script>
+	</body>
+</html>

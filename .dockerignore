@@ -1,0 +1,7 @@
+src/
+target/
+.gradle/
+.idea/
+out/
+resources/
+.git/

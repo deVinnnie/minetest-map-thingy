@@ -1,0 +1,48 @@
+html, body{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+#mapcontainer {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	z-index:-1;
+}
+
+#info, #poi{
+	background-color: #F4F1FFB3;
+}
+
+#poi:hover{
+	height: 50%;
+}
+
+#poi{
+	position: absolute;
+	z-index: 100;
+	left: calc(10px + 1%);
+	bottom: calc(10px + 1%);
+	width: 500px;
+	height: 50px;
+	border-radius:3px;
+	
+	transition: height 0.3s;
+	
+	padding-left: 10px;
+}
+
+#poi ul{
+	list-style: none;
+	display: none;
+	padding: 0;
+}
+
+#poi:hover ul{
+	display: block;
+}
+
+a{
+	color: #556655;
+}
