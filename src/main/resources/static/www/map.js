@@ -8,6 +8,23 @@ $.getJSON("conf.json",
 );
 
 function loadmap(config) {
+  /* 
+  * Workaround for 1px lines appearing in some browsers due to fractional transforms
+  * and resulting anti-aliasing.
+  * https://github.com/Leaflet/Leaflet/issues/3575
+  */
+  var originalInitTile = L.GridLayer.prototype._initTile
+  L.GridLayer.include({
+      _initTile: function (tile) {
+          originalInitTile.call(this, tile);
+
+          var tileSize = this.getTileSize();
+
+          tile.style.width = tileSize.x + 1 + 'px';
+          tile.style.height = tileSize.y + 1 + 'px';
+      }
+  });
+  
 	var mapsize = config.mapsize;
 	var spawn = config.spawn;
 	var zoommin = config.zoommin;
@@ -25,23 +42,22 @@ function loadmap(config) {
 		maxNativeZoom:20,
 		fullscreenControl: true,
 		//maxBounds: bnd, //commented out until it works...
-		crs: /*L.CRS.Simple*/
-		L.extend({}, L.CRS, {
-			projection: {
-				project: function (latlng) {
-					return new L.Point(latlng.lat+xb, latlng.lng+yb);
-				},
-
-				unproject: function (point) {
-					return new L.LatLng(point.x-xb, point.y-yb);
-				},
-				bounds: bounds
-			},
-			transformation: new L.Transformation(1, 0, -1, 0),
-			scale: function (zoom) {
-				return Math.pow(2, zoom-20);
-			}
-		})
+		crs: L.extend ({}, L.CRS.Simple, {
+        projection: {
+          project: function (latlng) {
+            return new L.Point(latlng.lat+xb, latlng.lng+yb);
+          },
+          
+          unproject: function (point) {
+            return new L.LatLng(point.x-xb, point.y-yb);
+          },
+          bounds: bounds
+        },
+        transformation: new L.Transformation(1, 0, -1, 0),
+        scale: function (zoom) {
+          return Math.pow(2, zoom-20);
+        }
+    })
 	}).setView([0,0], 19);
 	map.setView([spawn.x,spawn.y]);
 	L.tileLayer('tiles/{z}/map_{x}_{y}.png', {

@@ -23,6 +23,6 @@
 	top:calc(10px + 1%);
 	right:calc(10px + 1%);
 	padding:10px;
-	z-index:100;
+	z-index:1000;
 	border-radius:3px;
 }

@@ -21,7 +21,7 @@ html, body{
 
 #poi{
 	position: absolute;
-	z-index: 100;
+	z-index: 1000;
 	left: calc(10px + 1%);
 	bottom: calc(10px + 1%);
 	width: 500px;
