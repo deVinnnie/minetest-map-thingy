@@ -8,10 +8,4 @@ services:
       - /world:opt/world
       - /resources/tiles:/opt/tiles
     ports:
-     - 8080:8080
-    networks:
-    - bridge
-
-networks:
-  bridge:
-    driver: bridge
+      - 8080:8080
