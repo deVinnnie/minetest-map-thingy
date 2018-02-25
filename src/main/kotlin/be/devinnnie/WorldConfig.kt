@@ -8,4 +8,6 @@ import org.springframework.context.annotation.Configuration
 class WorldConfig{
 
     lateinit var directory: String
+
+    lateinit var tiles: String
 }
