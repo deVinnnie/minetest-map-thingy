@@ -8,12 +8,14 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" // Required for Kotlin integration
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version" // See https://kotlinlang.org/docs/reference/compiler-plugins.html#kotlin-spring-compiler-plugin
         classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.0'
     }
 }
 
 apply plugin: 'kotlin' // Required for Kotlin integration
 apply plugin: "kotlin-spring" // See https://kotlinlang.org/docs/reference/compiler-plugins.html#kotlin-spring-compiler-plugin
 apply plugin: 'org.springframework.boot'
+apply plugin: 'org.junit.platform.gradle.plugin'
 
 jar {
     baseName = 'app'
@@ -31,7 +33,10 @@ dependencies {
     compile "org.webjars:jquery:2.2.4"
     compile "org.webjars:webjars-locator:0.32-1"
     compile("org.springframework.boot:spring-boot-devtools")
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.junit.jupiter:junit-jupiter-api:5.1.0')
+    testRuntime('org.junit.jupiter:junit-jupiter-engine:5.1.0')
 }
 
 bootRun {

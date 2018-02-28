@@ -1,0 +1,72 @@
+extended_attributes = """
+null
+
+"""
+breath = 11
+yaw = 266.99
+pitch = -1.69
+version = 1
+name = vincent
+hp = 20
+position = (2480.19,475,2469.49)
+PlayerArgsEnd
+List main 32
+Width 0
+Item default:pick_diamond 1 19600 "\u0001\u0002\u0003"
+Item technic:mining_drill_mk3_3 1 19118 "\u0001\u0002return {[\"mode\"] = 3, [\"charge\"] = 460400}\u0003"
+Item default:ladder_wood 3
+Item default:pine_tree 34
+Empty
+Item mobs:chicken_cooked 19
+Item travelnet:travelnet_hub_3
+Item worldedit:wand
+Item default:apple 9
+Item default:stick 3
+Item technic:sonic_screwdriver 1 1 "\u0001\u0002return {[\"charge\"] = 15000}\u0003"
+Item default:stonebrick 18
+Item default:stone_block 44
+Empty
+Item default:stone 99
+Item technic:iron_chest 2
+Item default:chest 7
+Item default:torch 9
+Item default:axe_mese 1 0 "\u0001\u0002\u0003"
+Item stairs:slab_wood 22
+Empty
+Empty
+Item default:cobble 30
+Empty
+Item stairs:slab_stone_block 16
+Empty
+Item default:stone 99
+Item default:stone 60
+Empty
+Item default:shovel_mese 1 6776 "\u0001\u0002\u0003"
+Empty
+Empty
+EndInventoryList
+List craft 9
+Width 3
+Empty
+Empty
+Empty
+Empty
+Empty
+Empty
+Empty
+Empty
+Empty
+EndInventoryList
+List craftpreview 1
+Width 0
+Empty
+EndInventoryList
+List craftresult 1
+Width 0
+Empty
+EndInventoryList
+List hunger 1
+Width 0
+Item : 18
+EndInventoryList
+EndInventory
