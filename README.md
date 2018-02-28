@@ -1,5 +1,7 @@
 # Minetest Map
 
+[![Build Status](https://travis-ci.org/deVinnnie/minetest-map-thingy.svg?branch=master)](https://travis-ci.org/deVinnnie/minetest-map-thingy)
+
 Show current player positions, protected areas, and travelnets on a 2D map of a minetest world.
 
 ![screenshot](screenshot.png)
