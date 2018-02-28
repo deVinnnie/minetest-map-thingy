@@ -46,3 +46,7 @@ html, body{
 a{
 	color: #556655;
 }
+
+.leaflet-container{
+	cursor: crosshair;
+}
