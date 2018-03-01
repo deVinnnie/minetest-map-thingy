@@ -68,14 +68,61 @@ function listPOI(){
     );
 }
 
+function togglePlayerNames(){
+  tooltips.forEach(t => t.toggleTooltip())
+}
+
+let tooltips = [];
+
+
+
 function addPlayers(){
+  var togglePlayerNamesButton = L.Control.extend({
+    options: {
+      position: 'topleft' 
+    },
+    onAdd: function (map) {
+      let container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+      
+      container.style.backgroundColor = 'white';
+      container.style.width = '26px';
+      container.style.height = '26px';
+      
+      let button = L.DomUtil.create('button');
+      button.id = "toggle-player-names";
+      
+      let buttonText = document.createTextNode("A");
+      button.appendChild(buttonText);
+      
+      container.appendChild(button);
+
+      container.onclick = function(event){
+        togglePlayerNames();
+        event.preventDefault();
+      }
+      return container;
+    },
+  });
+  
+  map.addControl(new togglePlayerNamesButton());
+  
   $.getJSON("/players",
     (data) => {
       data.forEach((player) => {
-        L.marker([player.position.x, player.position.z], {icon: playerIcon})
-               .addTo(map)
-               .bindPopup(""+player.name + " (" + player.position.x + ", " + player.position.y + ", " + player.position.z+")");
-          }
+                let marker = L.marker([player.position.x, player.position.z],
+                    {
+                      icon: playerIcon,
+                      title: player.name,
+                      zIndexOffset: 1000
+                    }
+                )
+               .addTo(map);
+               
+               let tooltip = marker.bindTooltip(player.name, {
+                 "direction" : "top",
+               });
+               tooltips.push(tooltip);
+        }
       );
     }
   );

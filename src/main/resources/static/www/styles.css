@@ -50,3 +50,19 @@ a{
 .leaflet-container{
 	cursor: crosshair;
 }
+
+button#toggle-player-names{
+	border-radius: 4px;
+	cursor: pointer;
+	background-color: transparent;
+	text-align: center;
+	border:0;
+	padding:0;
+	width:26px;
+	height:26px;
+	font: bold 18px 'Lucida Console', Monaco, monospace;
+}
+
+button#toggle-player-names:hover{
+	background-color: #f4f4f4;
+}
