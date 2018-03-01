@@ -11,15 +11,6 @@ var LeafIcon = L.Icon.extend({
 
 var playerIcon = new LeafIcon({iconUrl: 'images/player.png'});
 
-function addMarkers(locations){
-    locations.forEach(function(location, index){
-            L.marker([location.x, location.z])
-             .addTo(map)
-             .bindPopup(""+location.name + " (" + location.x + ", " + location.y + ", " + location.z+")");
-        }
-    );
-}
-
 function addAreas(){
       $.getJSON("/areas",
         (data) => {
@@ -42,29 +33,28 @@ function listPOI(){
     var list = document.getElementById('map-navigation');
 
     $.getJSON("/travelnets",
-            (travelnets) => {
-                Object.keys(travelnets["porters"])
-                      .forEach((key,index) => {
-                              console.log(key)
-                              var listElement = document.createElement("li");
+        (travelnets) => {
+            Object.keys(travelnets["porters"])
+              .forEach((key,index) => {
+                  var listElement = document.createElement("li");
 
-                              var porter = travelnets["porters"][key];
+                  var porter = travelnets["porters"][key];
 
-                              var link = document.createElement("a");
-                              link.setAttribute("data-position", porter.pos.x + "," + porter.pos.z);
-                              link.setAttribute("href", "#");
-                              var node = document.createTextNode(key);
-                              link.appendChild(node);
+                  var link = document.createElement("a");
+                  link.setAttribute("data-position", porter.pos.x + "," + porter.pos.z);
+                  link.setAttribute("href", "#");
+                  var node = document.createTextNode(key);
+                  link.appendChild(node);
 
-                              listElement.appendChild(link);
+                  listElement.appendChild(link);
 
-                              list.appendChild(listElement);
-
-                      })
-
-
-
-            }
+                  list.appendChild(listElement);
+                  
+                  L.marker([porter.pos.x, porter.pos.z])
+                   .addTo(map)
+                   .bindPopup(""+ key + " (" + porter.pos.x + ", " + porter.pos.y + ", " + porter.pos.z+")");
+            })
+        }
     );
 }
 
