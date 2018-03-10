@@ -1,9 +1,14 @@
 package be.devinnnie.parsers
 
+import be.devinnnie.Station
 import be.devinnnie.WorldConfig
+import com.fasterxml.jackson.core.type.TypeReference
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.nio.file.Paths
+import com.fasterxml.jackson.databind.ObjectMapper
+import java.util.HashMap
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 
 @Component
 class TravelNetParser {
@@ -11,7 +16,7 @@ class TravelNetParser {
     @Autowired
     lateinit var config: WorldConfig
 
-    fun parse(): String {
+    fun parse(): Map<String, Map<String, Map<String, Station>>> {
         val lineList = mutableListOf<String>()
 
         Paths.get("${config.directory}/mod_travelnet.data")
@@ -20,14 +25,17 @@ class TravelNetParser {
                     lines -> lines.forEach { lineList.add(it) }
                 }
 
-        val travelnets = lineList.first()
-                .substring(0, lineList.first().length - 2)
-                .replace("return {", "")
+        val parsed = lineList.joinToString("")
+                .replace("return ", "")
                 .replace("[", "")
                 .replace("]", "")
                 .replace("=", ":")
-                .replace("\"vincent\" : {","")
 
-        return "{$travelnets}"
+        val mapper = ObjectMapper()
+        mapper.registerKotlinModule()
+
+        val typeRef = object : TypeReference<HashMap<String, HashMap<String, HashMap<String, Station>>>>() {}
+
+        return mapper.readValue(parsed, typeRef)
     }
 }

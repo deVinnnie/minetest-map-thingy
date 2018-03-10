@@ -26,8 +26,28 @@ class RestApiController {
     }
 
     @GetMapping(value= ["/travelnets"], produces=[MediaType.APPLICATION_JSON_UTF8_VALUE])
-    fun travelnets(): String {
-        return travelnets.parse()
+    fun travelnets(): List<Station> {
+        val travelnets = travelnets.parse()
+        val stations: MutableList<Station> = mutableListOf()
+
+        for (owner in travelnets) {
+            val ownerName = owner.key
+            for(network in owner.value){
+                val networkName = network.key
+                for(stationEntry in network.value){
+                    val stationName = stationEntry.key
+
+                    stations.add(
+                        Station(
+                            ownerName,
+                            networkName,
+                            stationName,
+                            stationEntry.value.pos
+                    ))
+                }
+            }
+        }
+        return stations
     }
 
     @GetMapping("/players")

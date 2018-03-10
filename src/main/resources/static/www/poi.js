@@ -34,26 +34,25 @@ function listPOI(){
 
     $.getJSON("/travelnets",
         (travelnets) => {
-            Object.keys(travelnets["porters"])
-              .forEach((key,index) => {
-                  var listElement = document.createElement("li");
+           travelnets.forEach(
+              station => {
+              var listElement = document.createElement("li");
 
-                  var porter = travelnets["porters"][key];
+              var link = document.createElement("a");
+              link.setAttribute("data-position", station.pos.x + "," + station.pos.z);
+              link.setAttribute("href", "#");
+              var node = document.createTextNode(station.name);
+              link.appendChild(node);
 
-                  var link = document.createElement("a");
-                  link.setAttribute("data-position", porter.pos.x + "," + porter.pos.z);
-                  link.setAttribute("href", "#");
-                  var node = document.createTextNode(key);
-                  link.appendChild(node);
+              listElement.appendChild(link);
 
-                  listElement.appendChild(link);
+              list.appendChild(listElement);
 
-                  list.appendChild(listElement);
-                  
-                  L.marker([porter.pos.x, porter.pos.z])
-                   .addTo(map)
-                   .bindPopup(""+ key + " (" + porter.pos.x + ", " + porter.pos.y + ", " + porter.pos.z+")");
-            })
+              L.marker([station.pos.x, station.pos.z])
+               .addTo(map)
+               .bindPopup(""+ station.name + " [ " + station.owner + " -> " + station.network + " ] (" + station.pos.x + ", " + station.pos.y + ", " + station.pos.z+")");
+            }
+           );
         }
     );
 }
