@@ -6,9 +6,14 @@ Show current player positions, protected areas, and travelnets on a 2D map of a 
 
 ![screenshot](screenshot.png)
 
-Build from source:
+Run with Docker:
 ```
-gradle assemble && docker-compose build && docker-compose up --force-recreate
+docker-compose build && docker-compose up --force-recreate
+```
+
+Run with gradle (for dev):
+```
+gradle bootRun
 ```
 
 ## What is it? And what does this thing do?
