@@ -15,7 +15,6 @@ buildscript {
 apply plugin: 'kotlin' // Required for Kotlin integration
 apply plugin: "kotlin-spring" // See https://kotlinlang.org/docs/reference/compiler-plugins.html#kotlin-spring-compiler-plugin
 apply plugin: 'org.springframework.boot'
-apply plugin: 'org.junit.platform.gradle.plugin'
 apply plugin: 'io.spring.dependency-management'
 
 jar {
@@ -49,4 +48,8 @@ bootRun {
 
 bootJar {
     archiveName 'app.jar'
+}
+
+test {
+    useJUnitPlatform()
 }
