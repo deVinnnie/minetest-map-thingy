@@ -1,6 +1,5 @@
 resources/tiles
 .gradle
-gradle
 target
 .idea
 build/
